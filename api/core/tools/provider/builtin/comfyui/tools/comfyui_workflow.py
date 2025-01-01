@@ -1,4 +1,5 @@
 import json
+import mimetypes
 from typing import Any
 
 from core.file import FileType
@@ -70,12 +71,17 @@ class ComfyUIWorkflowTool(BuiltinTool):
             else:
                 prompt = comfyui.set_prompt_images_by_default(prompt, image_names)
 
+        if seed_id := tool_parameters.get("seed_id"):
+            prompt = comfyui.set_prompt_seed_by_id(prompt, seed_id)
+
         images = comfyui.generate_image_by_prompt(prompt)
         result = []
-        for img in images:
+        for image_data, filename in images:
             result.append(
                 self.create_blob_message(
-                    blob=img, meta={"mime_type": "image/png"}, save_as=self.VariableKey.IMAGE.value
+                    blob=image_data,
+                    meta={"mime_type": mimetypes.guess_type(filename)[0]},
+                    save_as=self.VariableKey.IMAGE.value,
                 )
             )
         return result

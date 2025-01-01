@@ -42,6 +42,11 @@ const translation = {
     zoomIn: 'Ampliar',
     copyImage: 'Copiar imagem',
     openInNewTab: 'Abrir em nova guia',
+    viewMore: 'VER MAIS',
+    regenerate: 'Regenerar',
+    close: 'Fechar',
+    saveAndRegenerate: 'Salvar e regenerar pedaços filhos',
+    view: 'Vista',
   },
   placeholder: {
     input: 'Por favor, insira',
@@ -191,6 +196,7 @@ const translation = {
     editorTip: 'Pode editar aplicativos, mas não pode gerenciar configurações da equipe',
     inviteTeamMember: 'Adicionar membro da equipe',
     inviteTeamMemberTip: 'Eles podem acessar os dados da sua equipe diretamente após fazer login.',
+    emailNotSetup: 'O servidor de e-mail não está configurado, então os e-mails de convite não podem ser enviados. Por favor, notifique os usuários sobre o link de convite que será emitido após o convite.',
     email: 'E-mail',
     emailInvalid: 'Formato de e-mail inválido',
     emailPlaceholder: 'Por favor, insira e-mails',
@@ -473,6 +479,7 @@ const translation = {
     emptyTip: 'O Conhecimento não foi associado, por favor, vá para o aplicativo ou plug-in para completar a associação.',
     viewDoc: 'Ver documentação',
     relatedApp: 'aplicativos relacionados',
+    noRelatedApp: 'Nenhum aplicativo vinculado',
   },
   voiceInput: {
     speaking: 'Fale agora...',
@@ -590,6 +597,13 @@ const translation = {
     uploadFromComputerReadError: 'Falha na leitura do arquivo, tente novamente.',
     uploadFromComputerLimit: 'Carregar arquivo não pode exceder {{size}}',
     uploadFromComputerUploadError: 'Falha no upload do arquivo, faça o upload novamente.',
+  },
+  license: {
+    expiring: 'Expirando em um dia',
+    expiring_plural: 'Expirando em {{count}} dias',
+  },
+  pagination: {
+    perPage: 'Itens por página',
   },
 }
 
