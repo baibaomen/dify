@@ -590,9 +590,22 @@ services:
     depends_on:
       - api
       - web
-    ports:
-      - '${EXPOSE_NGINX_PORT:-80}:${NGINX_PORT:-80}'
-      - '${EXPOSE_NGINX_SSL_PORT:-443}:${NGINX_SSL_PORT:-443}'
+    #ports:
+    #  - '${EXPOSE_NGINX_PORT:-80}:${NGINX_PORT:-80}'
+    #  - '${EXPOSE_NGINX_SSL_PORT:-443}:${NGINX_SSL_PORT:-443}'
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik-net"
+      - "traefik.http.routers.dify-baibaomen-com.rule=Host(`dify.baibaomen.com`)"
+      - "traefik.http.routers.dify-baibaomen-com.entrypoints=websecure"
+      - "traefik.http.routers.dify-baibaomen-com.tls.certresolver=myresolver"
+      - "traefik.http.routers.dify-baibaomen-com-http.rule=Host(`dify.baibaomen.com`)"
+      - "traefik.http.routers.dify-baibaomen-com-http.entrypoints=web"
+      - "traefik.http.routers.dify-baibaomen-web-http.middlewares=redirect-to-https"
+      - "traefik.http.services.dify-baibaomen-com.loadbalancer.server.port=${NGINX_PORT:-80}"
+    networks:
+      - traefik-net
+      - default
 
   # The TiDB vector store.
   # For production use, please refer to https://github.com/pingcap/tidb-docker-compose
@@ -957,7 +970,9 @@ networks:
   opensearch-net:
     driver: bridge
     internal: true
-
+  traefik-net:
+    external: true
+    
 volumes:
   oradata:
   dify_es01_data:
